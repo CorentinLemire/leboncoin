@@ -4,35 +4,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C'est comme Leboncoin</title>
+    <title>VoisinMarket</title>
 
-    <!-- cdn bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- google fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Coiny&display=swap" rel="stylesheet">
-
-    <!-- css perso -->
+    <!-- CSS perso -->
     <link rel="stylesheet" href="../assets/css/style.css">
 
-    <!-- cdn icones bootstrap -->
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.8rem;
+        }
+
+        .btn-custom {
+            margin-left: 0.5rem;
+        }
+
+        .logo-header {
+            max-height: 50px;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 
-<body class="d-flex flex-column vh-100">
+<body>
+    <!-- Header / Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="../assets/img/logo.png" alt="logo" class="logo-header">
+                VoisinMarket
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <header class="border text-center p-3 bg-warning">
-        <h1 class="coiny-regular display-1">Le Bonarrondi<i class="ms-3 bi bi-arrow-repeat"></i></h1>
-    </header>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Annonces</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">À propos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
 
-    <footer class="mt-auto text-center p-5 mt-3 bg-warning">
-        <p>Afpa - 2025 - MVC</p>
-    </footer>
+                <!-- Boutons Inscription / Se connecter -->
+                <div class="d-flex">
+                    <a href="index.php?url=register" class="btn btn-primary">Inscription</a>
+                    <a href="index.php?url=login" class="btn btn-outline-primary btn-custom">Se connecter</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <!-- Contenu principal -->
+    <div class="container text-center mt-5">
+        <h1>Bienvenue sur VoisinMarket !</h1>
+        <p class="lead">Achetez et vendez près de chez vous facilement.</p>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

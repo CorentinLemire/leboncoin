@@ -1,6 +1,8 @@
 <?php
 
+use App\Controllers\AnnonceController;
 use App\Controllers\HomeController;
+use App\Controllers\UserController;
 
 // si le param url est présent on prend sa valeur, sinon on donne la valeur home
 $url = $_GET['url'] ?? 'home';
@@ -11,11 +13,40 @@ $arrayUrl = explode('/', $url);
 // je récupère la page demandée index 0
 $page = $arrayUrl[0];
 
-switch($page){
+switch ($page) {
     case 'home':
         $objController = new HomeController();
         $objController->index();
         break;
+    case 'register':
+        $objController = new UserController();
+        $objController->index();
+        break;
+    case 'login':
+        $objController = new UserController();
+        $objController->login();
+        break;
+    case 'profil':
+        $objController = new UserController();
+        $objController->index();
+        break;
+    case 'logout':
+        $objController = new UserController();
+        $objController->index();
+        break;
+    case 'annonces':
+        $objController = new AnnonceController();
+        $objController->index();
+        break;
+    case 'create':
+        $objController = new AnnonceController();
+        $objController->index();
+        break;
+    case 'details':
+        $objController = new AnnonceController();
+        $objController->index();
+        break;
+
     default:
         // aucun cas reconnu = on charge la 404
         require_once __DIR__ . "/../src/Views/page404.php";
