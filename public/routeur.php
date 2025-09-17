@@ -20,7 +20,7 @@ switch ($page) {
         break;
     case 'register':
         $objController = new UserController();
-        $objController->index();
+        $objController->register();
         break;
     case 'login':
         $objController = new UserController();
@@ -28,11 +28,11 @@ switch ($page) {
         break;
     case 'profil':
         $objController = new UserController();
-        $objController->index();
+        $objController->profil();
         break;
     case 'logout':
         $objController = new UserController();
-        $objController->index();
+        $objController->logout();
         break;
     case 'annonces':
         $objController = new AnnonceController();

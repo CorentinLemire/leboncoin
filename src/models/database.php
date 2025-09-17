@@ -35,4 +35,3 @@ class Database
         }
     }
 }
-echo "je n'apparait pas";

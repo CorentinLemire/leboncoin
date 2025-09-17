@@ -1,7 +1,5 @@
 <?php
 
-
-
 namespace App\Models;
 
 use App\Models\Database;
@@ -11,6 +9,13 @@ use PDOException;
 
 class User
 {
+
+    public int $id;
+    public string $email;
+    public string $password;
+    public string $username;
+    public string $inscription;
+
     /**
      * Permet de créer un utilisateur dans la table users
      * @param string $email
@@ -109,7 +114,7 @@ class User
     }
 
     /**
-     * Permet de vérifier si un nom d’utilisateur (username) existe déjà dans la table users
+     * Permet de vérifier si un username existe déjà dans la table users
      * @param string $username
      * @return bool true si le username existe, false s'il n'existe pas
      */
@@ -155,6 +160,57 @@ class User
             }
         } catch (PDOException $e) {
             // Test unitaire pour connaître la raison de l’échec
+            // echo 'Erreur : ' . $e->getMessage();
+            return false;
+        }
+    }
+
+
+    /**
+     * Permet de récupérer les infos d'un utilisateur via son email
+     * et d'hydrater l'objet User avec les données récupérées
+     * @param string $email
+     * @return bool true si l'utilisateur a été trouvé et l'objet hydraté, false en cas d'erreur ou si l'utilisateur n'existe pas
+     */
+    public function getUserInfosByEmail(string $email): bool
+    {
+        try {
+            // Creation d'une instance de connexion à la base de données
+            $pdo = Database::createInstancePDO();
+
+            // test si la connexion est ok
+            if (!$pdo) {
+                // pas de connexion, on return false
+                return false;
+            }
+
+            // requête SQL pour insérer un utilisateur dans la table users
+            $sql = "SELECT * FROM `users` WHERE `u_email` = :email";
+
+            // On prépare la requête avant de l'exécuter
+            $stmt = $pdo->prepare($sql);
+
+            // On associe chaque paramètre nommé de la requête (:email, :password, :username)
+            // avec la valeur correspondante en PHP, en précisant leur type (ici string).
+            // Grâce aux requêtes préparées, cela empêche toute injection SQL.
+            $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+
+            // On execute la réquête
+            $stmt->execute();
+
+            // On recupère les données via un fetch() : se sera un objet
+            $user = $stmt->fetch(PDO::FETCH_OBJ);
+
+            // On hydrate notre objet avec les valeurs du User
+            $this->id = $user->u_id;
+            $this->email = $user->u_email;
+            $this->password = $user->u_password;
+            $this->username = $user->u_username;
+            $this->inscription = $user->u_inscription;
+
+            return true;
+        } catch (PDOException $e) {
+            // test unitaire pour connaitre la raison de l'echec
             // echo 'Erreur : ' . $e->getMessage();
             return false;
         }
