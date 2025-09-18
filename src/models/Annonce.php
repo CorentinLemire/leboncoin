@@ -34,7 +34,7 @@ class Annonce
     //  */
     public function createAnnonce(string $title, string $description, float $price, ?string $picture, int $u_id): bool
     {
-        echo 'test dans fonction';
+
         try {
             // Creation d'une instance de connexion à la base de données
             $pdo = Database::createInstancePDO();
