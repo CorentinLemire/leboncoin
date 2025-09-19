@@ -15,14 +15,14 @@ use PDOException;
 class Annonce
 {
 
-    // public int $id;
-    // public string $title;
-    // public string $description;
-    // public string $price;
-    // public string $picture;
-    // public string $publication;
-    // public string $u_id;
-    // /**
+    public int $id;
+    public string $title;
+    public string $description;
+    public string $price;
+    public string $picture;
+    public string $publication;
+    public string $u_id;
+
     //  * Permet de créer un utilisateur dans la table users
     //  * @param string $title
     //  * @param string $description
