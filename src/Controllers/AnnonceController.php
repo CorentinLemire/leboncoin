@@ -50,7 +50,7 @@ class AnnonceController
         }
 
 
-        echo 'cest coimpoliquier';
+
 
 
 

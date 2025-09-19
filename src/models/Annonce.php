@@ -27,12 +27,16 @@ class Annonce
      * @param string $userId
      * @return bool true si l'insertion a réussi, false en cas d'erreur
      */
-    public function createAnnonce(string $title, string $description, float $price, string $picture, int $u_id): bool
+    public function createAnnonce(string $title, string $description, float $price, ?string $picture, int $u_id): bool
     {
+
         try {
+            // Creation d'une instance de connexion à la base de données
             $pdo = Database::createInstancePDO();
 
+            // test si la connexion est ok
             if (!$pdo) {
+                // pas de connexion, on return false
                 return false;
             }
 
@@ -47,17 +51,12 @@ class Annonce
             $stmt->bindValue(':a_price', $price, PDO::PARAM_STR);
             $stmt->bindValue(':a_picture', $picture, PDO::PARAM_STR);
             $stmt->bindValue(':u_id', $u_id, PDO::PARAM_STR);
-            // On prépare la requête avant de l'exécuter
-            $stmt = $pdo->prepare($sql);
 
 
-            // On exécute la requête préparée. La méthode renvoie true si tout s’est bien passé,
-            // false sinon. 
-            // NB : Avec PDO configuré en mode ERRMODE_EXCEPTION, une erreur déclenchera une exception.
             return $stmt->execute();
         } catch (PDOException $e) {
             // En cas d'erreur, on peut la logger ou l'afficher
-            echo 'test';
+            echo "Erreur lors de la création de l'annonce : " . $e->getMessage();
             return false;
         }
     }

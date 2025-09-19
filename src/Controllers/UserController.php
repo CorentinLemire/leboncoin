@@ -44,18 +44,9 @@ class UserController
                 $usermodel = new User();
                 $usermodel->createUser($email, $password, $username);
 
-                // Démarre la session si pas déjà active
-                if (session_status() === PHP_SESSION_NONE) {
-                    session_start();
-                }
 
-                // Stocke l’utilisateur dans la session
-                $_SESSION['user'] = [
-                    'username' => $username,
-                    'email' => $email
-                ];
 
-                header("Location: index.php?=home");
+                header("Location: index.php?=login");
                 exit;
             }
 
