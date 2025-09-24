@@ -18,7 +18,7 @@
     <div class="">
 
         <h2 class="text-center">Créer une annonce</h2>
-        <form method="post" class="form-container mx-auto ">
+        <form method="post" class="form-container mx-auto " enctype="multipart/form-data">
 
             <!-- Titre -->
             <div class="">
@@ -35,10 +35,10 @@
             <!-- Photo -->
             <div class="">
                 <label for="photo" class="form-label">
-                    <b>Photo : </b>
+                    <b><i><?= isset($errors['picture']) ? htmlspecialchars($errors['picture']) : '' ?></i></b>
                 </label>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile">
+                    <input type="file" class="custom-file-input" id="picture" name="picture">
                 </div>
             </div>
             <!-- Description -->
@@ -60,7 +60,7 @@
             </div>
             <div class="text-danger">* Champs obligatoires</div>
             <div class="text-center mt-5">
-                <button type="submit" class="btn">Créer l'annonce</button>
+                <button type="submit" class="btn border border-danger btn btn-primary">Créer l'annonce</button>
             </div>
 
         </form>

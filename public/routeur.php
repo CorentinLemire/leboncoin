@@ -34,18 +34,22 @@ switch ($page) {
         $objController = new UserController();
         $objController->logout();
         break;
-    // case 'annonces':
-    //     $objController = new AnnonceController();
-    //     $objController->Annonce();
-    //     break;
+    case 'annonces':
+        $objController = new AnnonceController();
+        $objController->index();
+        break;
     case 'create':
         $objController = new AnnonceController();
         $objController->create();
         break;
-    // case 'details':
-    //     $objController = new AnnonceController();
-    //     $objController->index();
-    //     break;
+    case 'details':
+        $objController = new AnnonceController();
+        $objController->show($arrayUrl[1] ?? null);
+        break;
+    case 'delete':
+        $objController = new AnnonceController();
+        $objController->delete($arrayUrl[1] ?? null, $_SESSION['user']['id']);
+        break;
 
     default:
         // aucun cas reconnu = on charge la 404

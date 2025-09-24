@@ -120,6 +120,22 @@ class UserController
     }
     public function profil()
     {
-        require_once __DIR__ . "/../Views/profil.php";
+        // Vérifier si l'utilisateur est connecté
+        if (!isset($_SESSION['user'])) {
+            header('Location: index.php?url=login');
+            exit;
+        }
+
+        $userId = $_SESSION['user']['id'];
+
+        // Charger les annonces de l'utilisateur
+        $annonceModel = new \App\Models\Annonce();
+        $annonces = $annonceModel->findByUserId($userId);
+
+        // On peut aussi récupérer les infos de l'utilisateur via $_SESSION
+        $user = $_SESSION['user'];
+
+        // Passer les données à la vue
+        require __DIR__ . "/../Views/profil.php";
     }
 }

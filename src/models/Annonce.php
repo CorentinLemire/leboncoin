@@ -72,8 +72,7 @@ class Annonce
             }
 
             // requête SQL pour récupérer toute la table annonces
-            $sql = 'SELECT * FROM `annonces`';
-
+            $sql = 'SELECT `a_id`, `a_title`, `a_description`, `a_price`, `a_picture`, `a_publication`, `u_id`, `u_username` FROM `annonces` NATURAL JOIN `users`';
 
 
             // On prépare la requête avant de l'exécuter
@@ -86,6 +85,83 @@ class Annonce
             // echo 'Erreur : ' . $e->getMessage();
             // return false;
             return [];
+        }
+    }
+    public function findById(int $id): ?array
+    {
+        try {
+            $pdo = Database::createInstancePDO();
+            $sql = 'SELECT `a_id`, `a_title`, `a_description`, `a_price`, `a_picture`, `a_publication`, `u_id`, `u_username` FROM `annonces` NATURAL JOIN `users` WHERE a_id = :id';
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $annonce = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $annonce ?: null;
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
+    public function findByUserId(int $userId): array
+    {
+        try {
+            $pdo = Database::createInstancePDO();
+            if (!$pdo) {
+                return [];
+            }
+
+            $sql = "SELECT `a_id`, `a_title`, `a_description`, `a_price`, `a_picture`, 
+                       `a_publication`, `u_id`, `u_username` 
+                FROM `annonces` 
+                NATURAL JOIN `users` 
+                WHERE u_id = :u_id 
+                ORDER BY a_publication DESC";
+
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':u_id', $userId, PDO::PARAM_INT);
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return [];
+        }
+    }
+    public function findByUser(int $userId): ?array
+    {
+        try {
+            $pdo = Database::createInstancePDO();
+            if (!$pdo) {
+                return null;
+            }
+            $sql = 'SELECT `a_id`, `a_title`, `a_description`, `a_price`, `a_picture`, `a_publication`, `u_id`, `u_username` FROM `annonces` NATURAL JOIN `users` WHERE u_id = :userId';
+
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':userId', $userId, PDO::PARAM_INT);
+            $stmt->execute();
+            $annonceUser = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $annonceUser;
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
+    public function deletebyId(int $id, int $userId)
+    {
+        try {
+            $pdo = Database::createInstancePDO();
+            if (!$pdo) {
+                return null;
+            }
+            // Je supprime toutes les colonnes de ma table annonces, pour le cas ou on pointe sur le annonce id et sur l'user id
+            $sql = 'DELETE FROM `annonces` WHERE a_id = :id AND u_id = :userId';
+
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->bindValue(':userId', $userId, PDO::PARAM_INT);
+            $stmt->execute();
+            // on retourne true si l'execute a bien fonctionné
+            return true;
+        } catch (PDOException $e) {
+            return null;
         }
     }
 }

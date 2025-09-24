@@ -15,10 +15,10 @@
         <p>Voulez-vous vraiment vous déconnecter ?</p>
 
         <div class="d-flex justify-content-around mt-4">
-            <!-- Bouton qui appelle ta fonction logout -->
+
             <a href="index.php?url=logout" class="btn btn-danger">Se déconnecter</a>
 
-            <!-- Bouton pour annuler et revenir à l’accueil -->
+
             <a href="index.php?url=home" class="btn btn-secondary">Annuler</a>
         </div>
     </div>
