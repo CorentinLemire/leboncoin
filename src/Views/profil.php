@@ -70,6 +70,10 @@ include_once __DIR__ . "/templates/navbar.php";
                                 </a>
                             </div>
                         </div>
+                        <!-- Modifier l'annonce -->
+                        <a href="index.php?url=update/<?= $annonce['a_id'] ?>" class="btn bg-secondary mt-3">
+                            Modifier l'annonce
+                        </a>
                     </div>
                 </div>
             <?php endforeach; ?>

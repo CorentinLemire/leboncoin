@@ -50,6 +50,10 @@ switch ($page) {
         $objController = new AnnonceController();
         $objController->delete($arrayUrl[1] ?? null, $_SESSION['user']['id']);
         break;
+    case 'update':
+        $objController = new AnnonceController();
+        $objController->update($arrayUrl[1] ?? null);
+        break;
 
     default:
         // aucun cas reconnu = on charge la 404
